@@ -16,5 +16,6 @@ public interface DepartmentService {
 
     public void deleteDepartmentById(Long departmentId);
 
+
    public  Department findByDepartmentName(String departmentName);
 }
