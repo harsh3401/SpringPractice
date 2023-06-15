@@ -1,6 +1,7 @@
 package com.harshjain.Springboot.Practice.service;
 
 import com.harshjain.Springboot.Practice.entity.Department;
+import com.harshjain.Springboot.Practice.error.DepartmentNotFoundException;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface DepartmentService {
 
    public  List<Department> fetchDepartmentList();
 
-    public Department fetchDepartmentById(Long departmentId);
+    public Department fetchDepartmentById(Long departmentId) throws DepartmentNotFoundException;
 
     public Department putDepartment(Long departmentId, Department department);
 

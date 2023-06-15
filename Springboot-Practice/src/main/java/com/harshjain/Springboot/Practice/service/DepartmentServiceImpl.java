@@ -1,12 +1,14 @@
 package com.harshjain.Springboot.Practice.service;
 
 import com.harshjain.Springboot.Practice.entity.Department;
+import com.harshjain.Springboot.Practice.error.DepartmentNotFoundException;
 import com.harshjain.Springboot.Practice.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
@@ -23,8 +25,15 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public Department fetchDepartmentById(Long departmentId) {
-        return departmentRepository.findById(departmentId).get();
+    public Department fetchDepartmentById(Long departmentId) throws DepartmentNotFoundException {
+        Optional<Department> department =departmentRepository.findById(departmentId);
+        if(department.isEmpty())
+        {
+            throw new DepartmentNotFoundException("Department Not available");
+
+        }
+        return department.get();
+
     }
 
     @Override
@@ -57,7 +66,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Department findByDepartmentName(String departmentName) {
-        return departmentRepository.findByDepartmentName(departmentName);
+        return  departmentRepository.findByDepartmentName(departmentName);
     }
 
 
